@@ -1,27 +1,89 @@
-# SignalsApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0-rc.0.
+## Requisitos
+- Angular 16 para web
+- node 16
+## Pasos
 
-## Development server
+1. Levantar el proyecto con el comando
+```
+ng serve
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+2. Se importa signals en la pagina ***user.page***
+```
+   import { Component, OnInit, inject, signal } from '@angular/core';
+```
+3. Se agrega la señal, se remplaza por *** public character: Characters[] = [];**
+```
+   public character = signal<Characters[]>([]);
 
-## Code scaffolding
+```
+4. en el html se cllama al la señal, se remplaza por ***<div class="card" style="width: 18rem;" *ngFor="let item of character">***
+```
+   <div class="card" style="width: 18rem;" *ngFor="let item of character()">
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+5. Se agrega actualizar el valor de la señal en el observable, se remplaza por  ***this.character = response;***
+```
+  this.character.set(response);
+   
+```
+6. Ahora se elimina del html ***user.page.html***
+```
+    <p class="card-text">Especie: {{ item.species }}</p>
+    <p class="card-text">Status: {{ item.status }}</p>
+    <p class="card-text">Genero: {{ item.gender }}</p>
+```
 
-## Build
+6. Ahora se crea este componente ***ng g c users/pages/header***
+```
+    ng g c users/pages/header
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+7. en el componente **users/pages/header** se inyecta el servicio ***recuerda importar el servicio y el inyect**
+```
+    public userService = inject(UsersService)
+```
 
-## Running unit tests
+8. en el servicio ***user services*** se crean 3 señales arriba del constructor ***Recuerda importar las señales ***
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+  public nameCharacter = signal<string>('');
+  public species = signal<string>('');
+  public status = signal<string>('');
+```
 
-## Running end-to-end tests
+8. Ahora se declara el header del componente que se creo anterior mente en la pagina  ***User.page***
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+<app-header></app-header>
+```
 
-## Further help
+9. en este mismo componente  ***app-header*** se llama a las señales del servicio. 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+<h1>Personaje seleccionado: {{userService.nameCharacter() ? userService.nameCharacter() : 'Ninguno'}}</h1>
+<h3>Especie: {{ userService.species() ? userService.species() : 'Ninguno'}}</h3>
+<h3>Status: {{ userService.status() ? userService.status() : 'Ninguno'}}</h3>
+
+```
+
+10. ahora el user-page.component.html se agrega el siguiente boton, se remplaza por *** <a href="#" class="btn btn-primary">No me presiones</a>***. 
+
+```
+<a class="btn btn-primary" (click)="
+          checkInfo(
+            item.name, item.species, item.status
+          )">Ver mas</a>
+
+```
+
+11. ahora el user-page.component.ts se agrega el siguiente metodo que actualizara el nombre. 
+
+```
+public checkInfo(name: string, species: string, status: string): void {
+   this.userService.nameCharacter.set(name);
+   this.userService.species.set(species);
+   this.userService.status.set(status);
+  }
+```

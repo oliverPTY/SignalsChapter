@@ -18,5 +18,8 @@ export class UsersPageComponent implements OnInit{
 
   public checkInfo(name: string, species: string, status: string): void {
    this.userService.nameCharacter.set(name);
+   this.userService.species.set(species);
+   this.userService.status.set(status);
   }
+  
 }
