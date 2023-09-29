@@ -2,6 +2,9 @@
 ## Requisitos
 - Angular 16 para web
 - node 16
+
+## guia de instalacion de angular 16 
+https://www.codeproject.com/Articles/5360980/Angular-Migration-to-16
 ## Pasos
 
 0. Clonar el respositorio
