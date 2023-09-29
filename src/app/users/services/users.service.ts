@@ -12,8 +12,8 @@ export class UsersService {
 
   constructor( private http: HttpClient ) { }
 
-  public loadPage(): Observable<Characters> {
-    return this.http.get<Characters>(this.baseUrl).
+  public loadPage(): Observable<Characters[]> {
+    return this.http.get<Characters[]>(this.baseUrl).
     pipe(
       map((res: any) => res.results )
     )

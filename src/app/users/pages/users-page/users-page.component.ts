@@ -8,11 +8,10 @@ import { Characters } from '../../interfaces/users';
 })
 export class UsersPageComponent implements OnInit{
   public userService = inject(UsersService);
-  public character: any;
+  public character: Characters[] = [];
 
   ngOnInit(): void {
     this.userService.loadPage().subscribe(response =>{
-      console.log('response', response);
       this.character = response;
     });
   }
