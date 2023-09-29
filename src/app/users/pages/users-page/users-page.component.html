@@ -1,49 +1,22 @@
 <div class="row mt-3">
-
   <div class="col-12">
-    <h1>Usuarios <small>- sin Señales (Tradicional)</small></h1>
+    <h1>Personajes <small>- sin Señales (Tradicional)</small></h1>
     <hr>
   </div>
 
   <div class="col-12">
-    <table class="table table-striped-columns table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-          <th scope="col">Email</th>
-          <th scope="col">Avatar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>@fat</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Jessica</td>
-          <td>Davidson</td>
-          <td>@twitter</td>
-          <td>@twitter</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
+    <section class="sectionPrincipal">
+      <div class="card" style="width: 18rem;" *ngFor="let item of character">
+        <img src="{{item.image}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">Especie: {{ item.species }}</p>
+          <p class="card-text">Status: {{ item.status }}</p>
+          <p class="card-text">Genero: {{ item.gender }}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
 
