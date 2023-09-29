@@ -4,6 +4,11 @@
 - node 16
 ## Pasos
 
+0. Clonar el respositorio
+```
+git clone https://github.com/oliverPTY/SignalsChapter.git
+```
+
 1. Levantar el proyecto con el comando
 ```
 ng serve
