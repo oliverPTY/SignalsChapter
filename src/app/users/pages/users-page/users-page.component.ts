@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Characters } from '../../interfaces/users';
 
@@ -8,11 +8,15 @@ import { Characters } from '../../interfaces/users';
 })
 export class UsersPageComponent implements OnInit{
   public userService = inject(UsersService);
-  public character: Characters[] = [];
+  public character = signal<Characters[]>([]);
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.userService.loadPage().subscribe(response =>{
-      this.character = response;
+      this.character.set(response);
     });
+  }
+
+  public checkInfo(name: string, species: string, status: string): void {
+   this.userService.nameCharacter.set(name);
   }
 }
